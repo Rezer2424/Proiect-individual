@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <<meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+  <!-- Chart.js Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+  <section class="chart-wrapper">
+  <!-- chart canvas -->
+  <canvas id="chart-name"></canvas>
+</section>
+
+<section class="chart-wrapper">
+   <!-- chart canvas -->
+   <canvas id="chart-name"></canvas>
+</section>
+
+<style>
+   .chart-wrapper {
+      position: relative;
+      width: 50vw;
+
+      /* align at page center*/
+      margin: 0 auto;
+   }
+</style>
+
+<script>
+// 1. The canvas reference to display the chart.
+const chartCanvas = document.getElementById('chart-name').getContext('2d');
+
+// 2. The chart configuration.
+const config = {
+type: 'bar', // chart type
+data: {
+  // The chart labels, the horizontal labels of the chart.
+  labels: ['label-1', 'label-2', 'label-3', 'label-4', 'label-5'],
+
+  // The chart datasets
+  datasets: [
+    {
+      // The chart data, the horizontal labels of the chart.
+      data: [67.7, 63.1, 54.7, 44.1, 40.2],
+
+      // Chart label
+      label: 'Chart Label',
+      backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+     hoverOffset: 5
+    },
+  ],
+},
+// Canvas are not responsive by default
+options: {
+  responsive: true,
+},
+};
+
+// 3. The chart instance, which is needed to initiate a new type of chart.
+const newBarChart = new Chart(chartCanvas, config);
+
+</script>
+</body>
+
+</html>
