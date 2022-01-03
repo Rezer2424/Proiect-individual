@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>Covid Vaccine Analysis</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Covid Vaccine Analysis</div>
+      <div class="toggle"></div>
+      <div class="navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Vaccine</a></li>
+        </ul>
+
+      </div>
+    </header>
+    <script src="js/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+      <script type="text/javascript">
+    window.onload=function(){/*w ww .  j a  va  2s  .c om*/
+$(document).ready(function() {
+  var labels = [];
+  var total_vaccinations = [];
+  var people_vaccinated=[];
+  var people_fully_vaccinated = [];
+  var daily_vaccinations = [];
+  var daily_vaccinations_per_hundred = [];
+  var total_vaccinations_per_hundred = [];
+  var people_vaccinated_per_hundred = [];
+  var people_fully_vaccinated_per_hundred = [];
+  var daily_vaccinations_per_million = [];
+
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.json',
+    dataType: 'json',
+    success: function(field) {
+//         $.each(data, function(key, value){
+//     var labels = json.map(function(item) {
+//       labels.push(item.key);
+//    });
+//     var data = json.map(function(item) {
+//       data.push(item.value);
+//    });
+//    });
+       console.log(field[192])
+$.each(field[192].data, function(key, value){
+    //console.log(value.date)
+    labels.push(value.date);
+    //console.log(value.daily_vaccinations)
+    total_vaccinations.push(value.total_vaccinations)
+    people_vaccinated.push(value.people_vaccinated)
+    people_fully_vaccinated.push(people_fully_vaccinated)
+    daily_vaccinations.push(value.daily_vaccinations)
+    daily_vaccinations_per_hundred.push(value.daily_vaccinations_per_hundred)
+    total_vaccinations_per_hundred.push(value.total_vaccinations_per_hundred)
+    people_fully_vaccinated_per_hundred.push(value.people_fully_vaccinated_per_hundred)
+    people_vaccinated_per_hundred.push(value.people_vaccinated_per_hundred)
+    daily_vaccinations_per_million.push(value.daily_vaccinations_per_million)
+   // console.log(value.total_vaccinations)
+})
+      var ctx = document.getElementById("myChart1").getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+              label: 'total_vaccinations',
+              data: total_vaccinations,
+              fill: false,
+              backgroundColor: 'green',
+              borderColor: 'green',
+            },
+
+
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    }
+  });
+})
+    }
+
+      </script>
+   </head>
+   <body>
+      <canvas id="myChart1" height="130"></canvas>
+
+   </body>
+</html>
